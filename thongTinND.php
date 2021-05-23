@@ -179,9 +179,15 @@ class thongTinND
      * @param string $max Năm sinh lớn nhất
      * @return string
      */
-    public function TaoNamSinh($min = 1970, $max = 2010)
+    public function TaoNamSinh($min = NULL, $max = NULL)
     {
-        $this->namsinh = "" . rand($min, $max);
+
+        if ($min == NULL)
+            $min = 1970;
+        if ($max == NULL)
+            $max = 2010;
+
+        $this->namsinh = rand($min, $max);
         return $this->namsinh;
     }
 
@@ -195,9 +201,9 @@ class thongTinND
      */
     public function TaoNgayThangNamSinh($format = "d/m/Y", $min = 1970, $max = 2010)
     {
-        $this->TaoNamSinh();
+        $this->TaoNamSinh($min, $max);
         $this->TaoThangSinh();
-        $this->TaoNamSinh();
+        $this->TaoNgaySinh();
         return $this->DinhDangNgay($format);
     }
 
@@ -213,6 +219,4 @@ class thongTinND
     }
 }
 
-// $u = new thongTinND();
-// var_dump($u->Tao());
-// var_dump($u->DinhDangNgay("d"));
+$u = new thongTinND();
