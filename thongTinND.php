@@ -35,7 +35,7 @@ class thongTinND
      * @param integer $nsmax Năm sinh lớn nhất
      * @return array
      */
-    public function Tao($gioitinh = NULL, $ho = NULL, $tongiao = NULL, $nsmin = NULL, $nsmax = NULL)
+    public function Tao($gioitinh = "", $ho = "", $tongiao = "", $nsmin = "", $nsmax = "")
     {
         $this->TaoGioiTinh($gioitinh);
         $this->TaoHoTen($ho);
@@ -75,9 +75,9 @@ class thongTinND
      * @param string $gioitinh Giới tính mong muốn
      * @return string
      */
-    public function TaoGioiTinh($gioitinh = NULL)
+    public function TaoGioiTinh($gioitinh = "")
     {
-        if ($gioitinh == NULL)
+        if ($gioitinh == "")
             if (rand(0, 1) == 0)
                 $this->gioitinh = "Nữ";
             else
@@ -92,9 +92,9 @@ class thongTinND
      * @param string $ho Họ mong muốn
      * @return string
      */
-    public function TaoHoTen($ho = NULL)
+    public function TaoHoTen($ho = "")
     {
-        if ($ho == NULL)
+        if ($ho == "")
             $this->hoten = $this->ho[rand(0, count($this->ho) - 1)];
         else
             $this->hoten = $ho;
@@ -112,9 +112,9 @@ class thongTinND
      * @param string $tongiao Tôn giáo mong muốn
      * @return string
      */
-    public function TaoTonGiao($tongiao = NULL)
+    public function TaoTonGiao($tongiao = "")
     {
-        if ($tongiao == NULL)
+        if ($tongiao == "")
             $this->tongiao = $this->tongiaoJson[rand(0, count($this->tongiaoJson) - 1)];
         else
             $this->tongiao = $tongiao;
@@ -150,7 +150,7 @@ class thongTinND
      */
     public function TaoNgaySinh()
     {
-        if ($this->thangsinh == NULL)
+        if ($this->thangsinh == "")
             $this->TaoThangSinh();
         switch ($this->thangsinh) {
             case '01':
@@ -179,15 +179,14 @@ class thongTinND
      * @param string $max Năm sinh lớn nhất
      * @return string
      */
-    public function TaoNamSinh($min = NULL, $max = NULL)
+    public function TaoNamSinh($min = "", $max = "")
     {
 
-        if ($min == NULL)
+        if ($min == "" || $min < "1970")
             $min = 1970;
-        if ($max == NULL)
+        if ($max == "")
             $max = 2010;
-
-        $this->namsinh = rand($min, $max);
+        $this->namsinh = rand((int) $min, (int) $max);
         return $this->namsinh;
     }
 
@@ -218,5 +217,3 @@ class thongTinND
         return date($format, strtotime($this->namsinh . "/" . $this->thangsinh . "/" . $this->ngaysinh));
     }
 }
-
-$u = new thongTinND();
